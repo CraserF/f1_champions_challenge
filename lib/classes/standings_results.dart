@@ -4,9 +4,9 @@ import 'driver.dart';
 
 /// Class that includes the race standings per year.
 class Standings {
-  final int? season;
+  final int season;
   final int? round;
-  final int? championsPoints;
+  final double? championsPoints;
   final int? championsWins;
   final Driver? driver;
   final Constructor? constructor;
@@ -23,10 +23,10 @@ class Standings {
     }
   */
   Standings.createFromMap(Map<String, dynamic> map)
-      : season = map['season'],
-        round = map['round'],
-        championsPoints = map['DriverStandings'][0]['points'],
-        championsWins = map['DriverStandings'][0]['wins'],
+      : season = int.tryParse(map['season']) ?? 0,
+        round = int.tryParse(map['round']),
+        championsPoints = double.parse(map['DriverStandings'][0]['points']),
+        championsWins = int.tryParse(map['DriverStandings'][0]['wins']),
         driver = Driver.fromMap(
           map['DriverStandings'][0]['Driver'],
         ),
