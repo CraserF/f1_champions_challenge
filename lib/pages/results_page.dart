@@ -22,7 +22,7 @@ class _ResultsPageState extends State<ResultsPage> {
     // Material page scaffold.
     return Scaffold(
       appBar: AppBar(
-        title: Text('Race Results for ${widget.standing.season} Season}'),
+        title: Text('Race Results for ${widget.standing.season} Season'),
       ),
 
       /// Body that shows results
