@@ -40,7 +40,7 @@ Future<List<Race>> getRaceResults(int year) async {
       Uri.parse('https://ergast.com/api/f1/$year/results/1.json');
 
   // Check if data is already stored.
-  if (_resultsMap.containsKey(year.toString())) {
+  if (_resultsMap.containsKey(year)) {
     return _resultsMap[year]!;
   }
 
