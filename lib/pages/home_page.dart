@@ -5,8 +5,9 @@ import '../classes/standings_results.dart';
 
 /// Stateful home page of the application.
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
+  const MyHomePage({
+    super.key,
+  });
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -19,7 +20,10 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         // Use the passed title.
-        title: Text(widget.title),
+        title: const Text('F1 World Champions'),
+        // actions: [
+        //   IconButton(onPressed: () {}, icon: const Icon(Icons.info)),
+        // ],
       ),
       body: FutureBuilder<List<Standing>>(
         future: standingsPerYear(),
@@ -49,12 +53,6 @@ class _MyHomePageState extends State<MyHomePage> {
           /// Scroll View for allowing sliver to dynamically load content.
           return CustomScrollView(
             slivers: [
-              const SliverAppBar(
-                title: Text(
-                  'F1 World Champions',
-                ),
-              ),
-
               /// Sliver list for dynamic displaying of content.
               SliverList(
                 delegate: SliverChildListDelegate(
