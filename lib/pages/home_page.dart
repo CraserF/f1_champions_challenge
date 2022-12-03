@@ -27,7 +27,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: FutureBuilder<List<Standing>>(
         future: standingsPerYear(),
-        initialData: const [],
         builder: (context, snapshot) {
           /// Display on error.
           if (snapshot.hasError) {
