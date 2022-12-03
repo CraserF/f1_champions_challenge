@@ -7,7 +7,7 @@ class Race {
   final String? round;
   final String? url;
   final String? raceName;
-  final Circuit circuit;
+  final Circuit? circuit;
   final String? date;
   final RaceResult result;
 
@@ -16,7 +16,8 @@ class Race {
         round = map['round'],
         url = map['url'],
         raceName = map['raceName'],
-        circuit = Circuit.fromMap(map['Circuit']),
+        circuit =
+            map['Circuit'] != null ? Circuit.fromMap(map['Circuit']) : null,
         date = map['date'],
         result = RaceResult.fromMap(map['Results'][0]);
 }
@@ -35,7 +36,9 @@ class RaceResult {
         points = map['points'],
         position = map['position'],
         driver = Driver.fromMap(map['Driver']),
-        fastestLap = FastestLap.fromMap(map['FastestLap']),
+        fastestLap = map['FastestLap'] != null
+            ? FastestLap.fromMap(map['FastestLap'])
+            : null,
         constructor = Constructor.fromMap(map['Constructor']);
 }
 
@@ -50,7 +53,8 @@ class Circuit {
       : circuitId = map['circuitId'],
         circuitName = map['circuitName'],
         url = map['url'],
-        location = Location.fromMap(map['Location']);
+        location =
+            map['Location'] != null ? Location.fromMap(map['Location']) : null;
 }
 
 /// Location details of a race.
@@ -72,12 +76,14 @@ class FastestLap {
   final String? rank;
   final String? lap;
   final String? time;
-  final AverageSpeed speed;
+  final AverageSpeed? speed;
 
   FastestLap.fromMap(Map<String, dynamic> map)
       : rank = map['rank'],
         lap = map['lap'],
-        speed = AverageSpeed.fromMap(map['AverageSpeed']),
+        speed = map['AverageSpeed'] != null
+            ? AverageSpeed.fromMap(map['AverageSpeed'])
+            : null,
         time = map['Time']['time'];
 }
 
