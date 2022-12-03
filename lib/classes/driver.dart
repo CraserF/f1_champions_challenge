@@ -6,7 +6,7 @@ Driver":{"driverId":"alonso","permanentNumber":"14","code":"ALO","url":"http:\/\
 /// Encompasses all driver details.
 class Driver {
   final String? driverId;
-  final int? permanentNumber;
+  final String? permanentNumber;
   final String? code;
   final String? name;
   final String? surname;
@@ -15,7 +15,7 @@ class Driver {
   final String? url;
 
   /// Retrieve the drivers full name.
-  String get fullName => '$name + $surname';
+  String get fullName => '$name $surname';
 
   /// Create an instance of the drivers class from a JSON Map.
   Driver.fromMap(Map<String, dynamic> map)
