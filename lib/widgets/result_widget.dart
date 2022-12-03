@@ -21,7 +21,15 @@ class ResultWidget extends StatelessWidget {
         width: 500,
         child: Card(
           clipBehavior: Clip.antiAlias,
-          elevation: isChampion ? null : 0,
+          elevation: null,
+          shape: isChampion
+              ? RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: Theme.of(context).colorScheme.outline,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(12)),
+                )
+              : null,
           color: isChampion
               ? Theme.of(context).colorScheme.secondaryContainer
               : null,
