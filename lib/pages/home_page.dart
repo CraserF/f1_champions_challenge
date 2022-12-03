@@ -1,3 +1,4 @@
+import '../widgets/champion_widget.dart';
 import '../services/f1_data_api.dart';
 import 'package:flutter/material.dart';
 import '../classes/standings_results.dart';
@@ -20,7 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // Use the passed title.
         title: Text(widget.title),
       ),
-      body: FutureBuilder<List<Standings>>(
+      body: FutureBuilder<List<Standing>>(
         future: standingsPerYear(),
         initialData: const [],
         builder: (context, snapshot) {
@@ -48,11 +49,17 @@ class _MyHomePageState extends State<MyHomePage> {
           /// Scroll View for allowing sliver to dynamically load content.
           return CustomScrollView(
             slivers: [
+              const SliverAppBar(
+                title: Text(
+                  'F1 World Champions',
+                ),
+              ),
+
               /// Sliver list for dynamic displaying of content.
               SliverList(
                 delegate: SliverChildListDelegate(
                   snapshot.data!
-                      .map((e) => Text(e.driver?.fullName ?? ''))
+                      .map((e) => ChampionWidget(standing: e))
                       .toList(),
                 ),
               ),
