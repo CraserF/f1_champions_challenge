@@ -1,3 +1,4 @@
+import 'dart:convert';
 import '../classes/race_results.dart';
 import 'package:http/http.dart' as http;
 
@@ -13,11 +14,18 @@ final _standingsUri =
 Future<List<Standings>> standingsPerYear() async {
   // Fetches all the years as JSON since 2005.
   try {
-    final json = await http.get(_standingsUri) as Map<String, dynamic>;
+    final response = await http.get(_standingsUri);
+    final json =
+        jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
     final table = json['MRData']['StandingsTable'] as Map<String, dynamic>;
-    final standings = table['StandingsLists'] as List<Map<String, dynamic>>;
-    return standings.map((e) => Standings.createFromMap(e)).toList();
+    final standings = table['StandingsLists'] as List<dynamic>;
+    final list = standings.map((e) => Standings.createFromMap(e)).toList();
+    list.sort(
+      (a, b) => a.season.compareTo(b.season),
+    );
+    return list;
   } catch (e) {
+    print(e);
     return [];
   }
 }
@@ -29,9 +37,11 @@ Future<List<Race>> getRaceResults(int year) async {
   final raceResultsUri = Uri.parse('https://ergast.com/api/f1/$year/results/1');
 
   try {
-    final json = await http.get(raceResultsUri) as Map<String, dynamic>;
+    final response = await http.get(raceResultsUri);
+    final json =
+        jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
     final table = json['MRData']['RaceTable'] as Map<String, dynamic>;
-    final races = table['Races'] as List<Map<String, dynamic>>;
+    final races = table['Races'] as List<dynamic>;
     return races.map((e) => Race.fromMap(e)).toList();
   } catch (e) {
     return [];
