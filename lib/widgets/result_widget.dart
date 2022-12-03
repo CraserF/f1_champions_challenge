@@ -43,7 +43,7 @@ class ResultWidget extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
             subtitle: Text(
-              '${race.round}. ${race.raceName}',
+              '${race.round}. ${race.raceName} · ${race.result.constructor?.name}',
               style: Theme.of(context).textTheme.subtitle1,
             ),
           ),
