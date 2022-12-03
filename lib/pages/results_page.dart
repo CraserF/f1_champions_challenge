@@ -28,7 +28,6 @@ class _ResultsPageState extends State<ResultsPage> {
       /// Body that shows results
       body: FutureBuilder<List<Race>>(
         future: getRaceResults(widget.standing.season),
-        initialData: const [],
         builder: (context, snapshot) {
           /// Display on error.
           if (snapshot.hasError) {
@@ -59,7 +58,11 @@ class _ResultsPageState extends State<ResultsPage> {
                 delegate: SliverChildListDelegate(
                   snapshot.data!
                       .map(
-                        (e) => ResultWidget(race: e),
+                        (e) => ResultWidget(
+                          race: e,
+                          isChampion: e.result.driver?.driverId ==
+                              widget.standing.driver?.driverId,
+                        ),
                       )
                       .toList(),
                 ),

@@ -20,6 +20,10 @@ class ResultWidget extends StatelessWidget {
         width: 500,
         child: Card(
           clipBehavior: Clip.antiAlias,
+          elevation: isChampion ? null : 0,
+          color: isChampion
+              ? Theme.of(context).colorScheme.secondaryContainer
+              : null,
           child: ListTile(
             title: Text(
               race.result.driver?.fullName ?? '',
