@@ -3,7 +3,7 @@ import 'package:f1_champions_challenge/classes/constructor.dart';
 import 'driver.dart';
 
 /// Class that includes the race standings per year.
-class Standings {
+class Standing {
   final int season;
   final int? round;
   final double? championsPoints;
@@ -22,7 +22,7 @@ class Standings {
       ]
     }
   */
-  Standings.createFromMap(Map<String, dynamic> map)
+  Standing.createFromMap(Map<String, dynamic> map)
       : season = int.tryParse(map['season']) ?? 0,
         round = int.tryParse(map['round']),
         championsPoints = double.parse(map['DriverStandings'][0]['points']),
