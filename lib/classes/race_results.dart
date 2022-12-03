@@ -20,8 +20,8 @@ import 'driver.dart';
 
 /// Encompasses all race details for a year.
 class Race {
-  final int? season;
-  final int? round;
+  final String? season;
+  final String? round;
   final String? url;
   final String? raceName;
   final Circuit circuit;
@@ -44,9 +44,9 @@ class Race {
 
 /// Results for a single race.
 class RaceResult {
-  final int? number;
-  final int? points;
-  final int? position;
+  final String? number;
+  final String? points;
+  final String? position;
   final Driver? driver;
   final Constructor? constructor;
 
@@ -74,8 +74,8 @@ class Circuit {
 
 /// Location details of a race.
 class Location {
-  final double? lat;
-  final double? long;
+  final String? lat;
+  final String? long;
   final String? locality;
   final String? country;
 
@@ -88,8 +88,8 @@ class Location {
 
 /// Fastest Lap of the race.
 class FastestLap {
-  final int? rank;
-  final int? lap;
+  final String? rank;
+  final String? lap;
   final String? time;
 
   FastestLap.fromMap(Map<String, dynamic> map)
@@ -101,7 +101,7 @@ class FastestLap {
 /// Average speed of a race.
 class AverageSpeed {
   final String? units;
-  final double? speed;
+  final String? speed;
 
   /// The average speed as a single quantity.
   String get averageSpeed => '$units$units';
