@@ -11,7 +11,7 @@ final _standingsUri =
 
 /// Get the overall Championship standings per year.
 /// Returns JSON.
-Future<List<Standings>> standingsPerYear() async {
+Future<List<Standing>> standingsPerYear() async {
   // Fetches all the years as JSON since 2005.
   try {
     final response = await http.get(_standingsUri);
@@ -19,22 +19,30 @@ Future<List<Standings>> standingsPerYear() async {
         jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
     final table = json['MRData']['StandingsTable'] as Map<String, dynamic>;
     final standings = table['StandingsLists'] as List<dynamic>;
-    final list = standings.map((e) => Standings.createFromMap(e)).toList();
+    final list = standings.map((e) => Standing.createFromMap(e)).toList();
     list.sort(
-      (a, b) => a.season.compareTo(b.season),
+      (a, b) => b.season.compareTo(a.season),
     );
     return list;
   } catch (e) {
-    print(e);
     return [];
   }
 }
+
+/// Private map to store fetched data.
+final _resultsMap = <int, List<Race>>{};
 
 /// Returns the race results per year.
 /// Async fetch from http://ergast.com/mrd/ api.
 Future<List<Race>> getRaceResults(int year) async {
   // Fetches all the race winners for a particular year.
-  final raceResultsUri = Uri.parse('https://ergast.com/api/f1/$year/results/1');
+  final raceResultsUri =
+      Uri.parse('https://ergast.com/api/f1/$year/results/1.json');
+
+  // Check if data is already stored.
+  if (_resultsMap.containsKey(year.toString())) {
+    return _resultsMap[year]!;
+  }
 
   try {
     final response = await http.get(raceResultsUri);
@@ -42,7 +50,10 @@ Future<List<Race>> getRaceResults(int year) async {
         jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
     final table = json['MRData']['RaceTable'] as Map<String, dynamic>;
     final races = table['Races'] as List<dynamic>;
-    return races.map((e) => Race.fromMap(e)).toList();
+    final list = races.map((e) => Race.fromMap(e)).toList();
+    _resultsMap[year] = list;
+
+    return list;
   } catch (e) {
     return [];
   }
