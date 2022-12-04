@@ -1,3 +1,5 @@
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import '../widgets/result_widget.dart';
 import '../classes/race_results.dart';
 import '../services/f1_data_api.dart';
@@ -53,6 +55,14 @@ class _ResultsPageState extends State<ResultsPage> {
           /// Scroll View for allowing sliver to dynamically load content.
           return CustomScrollView(
             slivers: [
+              SliverAppBar(
+                leading: const Center(child: FaIcon(FontAwesomeIcons.trophy)),
+                title: Text(
+                  'Champion: ${widget.standing.driver?.fullName} · ${widget.standing.championsPoints} Points · ${widget.standing.championsWins} Wins',
+                  maxLines: 2,
+                ),
+              ),
+
               /// Sliver list for dynamic displaying of content.
               SliverList(
                 delegate: SliverChildListDelegate(
