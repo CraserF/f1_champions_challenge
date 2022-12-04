@@ -1,0 +1,7 @@
+version: '3.4'
+# https://blog.codemagic.io/how-to-dockerize-flutter-apps/
+services:
+  app:
+    build: .
+    ports: 
+    - '3000:3000'
