@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // https://fonts.google.com/specimen/Zen+Dots?selected=Material+Icons:add_chart&preview.text=F1&preview.text_type=custom
-// https://pub.dev/packages/link_preview_generator - display image
 class ChampionWidget extends StatelessWidget {
   const ChampionWidget({
     super.key,
@@ -21,14 +20,14 @@ class ChampionWidget extends StatelessWidget {
         child: Card(
           clipBehavior: Clip.antiAlias,
           child: ListTile(
+            leading: const FaIcon(FontAwesomeIcons.trophy),
             title: Text(
               standing.driver?.fullName ?? '',
               style: Theme.of(context).textTheme.displaySmall,
               overflow: TextOverflow.ellipsis,
             ),
-            trailing: const FaIcon(FontAwesomeIcons.trophy),
             subtitle: Text(
-              standing.season.toString(),
+              '${standing.season} · ${standing.constructor?.name}',
               style: Theme.of(context).textTheme.subtitle1,
             ),
             onTap: () {
